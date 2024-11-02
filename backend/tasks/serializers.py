@@ -4,6 +4,8 @@ from .models import Task, Category
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    shared_with = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True, required=False)
+
     class Meta:
         model = Task
         fields = '__all__'
@@ -31,3 +33,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'is_active']
+

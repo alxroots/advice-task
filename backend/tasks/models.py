@@ -18,6 +18,7 @@ class Task(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
+    shared_with = models.ManyToManyField(User, related_name='shared_tasks', blank=True)
 
     def __str__(self):
         return self.title
